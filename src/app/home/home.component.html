@@ -1,1 +1,12 @@
-<p>home works!</p>
+<section class="google-map-container">
+	<google-map height="100vh" width="100vh" [zoom]="zoom" [center]="markerPositions[0]?.position">
+		<map-marker #marker="mapMarker" *ngFor="let markerPosition of markerPositions"
+			[position]="markerPosition?.position" [options]="markerOptions" (mapClick)="openInfoWindow(marker)">
+			<map-info-window>
+				<p>Latitude: {{markerPosition?.position.lat}}</p>
+				<p>Longitude: {{markerPosition?.position.lng}}</p>
+				<p>Name: {{markerPosition.text}}</p>
+			</map-info-window>
+		</map-marker>
+	</google-map>
+</section>

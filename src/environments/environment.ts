@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  apiUrl: 'https://qa2.gim.com.bd/ejogajog/api/v1/',
+  apiUrl: 'https://qa2.gim.com.bd/ejogajog/api/v1/auth/adminLogIn',
+  truckUrl: 'https://qa2.gim.com.bd/ejogajogAdminAPI/api/v1/admin/master/truckstands',
   production: false
 };
 
