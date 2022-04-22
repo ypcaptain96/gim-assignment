@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   get password() { return this.loginForm.get('password'); }
 
   onSubmit() {
+    console.log(this.loginForm.valid);
     this.isSubmitted = true;
     if (this.loginForm.valid) {
       this.isSubmitted = false;

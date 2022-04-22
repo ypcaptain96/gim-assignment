@@ -1,4 +1,7 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+
 
 import { SpinnerComponent } from './spinner.component';
 
@@ -8,9 +11,10 @@ describe('SpinnerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SpinnerComponent ]
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [SpinnerComponent,]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
