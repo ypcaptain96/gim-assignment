@@ -1,0 +1,30 @@
+<section class="login-box">
+
+	<section class="login-form">
+		<div class="title">Goods In Motion</div>
+		<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+			<article>
+				<div class="email" [ngClass]="{ 'is-invalid': isSubmitted && email?.errors}">
+					<input type="email" placeholder="E-mail" formControlName="email">
+				</div>
+				<div *ngIf="email?.errors && isSubmitted" class="invalid-feedback">
+					<div *ngIf="email?.errors?.['required']">E-mail is required</div>
+					<div *ngIf="email?.errors?.['pattern']">E-mail is invalid</div>
+				</div>
+			</article>
+
+			<article>
+				<div class="password" [ngClass]="{ 'is-invalid': isSubmitted && email?.errors}">
+					<input type="password" placeholder="Password" formControlName="password">
+				</div>
+				<div *ngIf="password?.errors && isSubmitted" class="invalid-feedback">
+					<div *ngIf="password?.errors?.['required']">Password is required</div>
+				</div>
+			</article>
+
+			<button type="submit" class="submit-button">Submit</button>
+
+		</form>
+	</section>
+
+</section>
