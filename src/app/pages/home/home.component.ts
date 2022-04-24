@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -11,7 +11,8 @@ import { AppService } from '../../shared/services/app.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  @ViewChild(MapInfoWindow) infoWindow?: MapInfoWindow;
+  @ViewChildren(MapInfoWindow) infoWindowsView!: QueryList<MapInfoWindow>;
+
   private destroyed$ = new Subject<boolean>();
 
   center: google.maps.LatLngLiteral = { lat: 23.8423489, lng: 90.3590594 };
@@ -39,6 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         next: (response: TruckData[]) => {
           this.markerPositions = response
             .map((result: TruckData) => {
+              console.log(result);
               return {
                 position: { lat: result.latitude, lng: result.longitude },
                 text: result.name,
@@ -52,16 +54,24 @@ export class HomeComponent implements OnInit, OnDestroy {
             });
           this.appService.isLoading.next(false);
         },
-        error: (error) => {
-          console.error(error);
-        }
+        error: (error) => console.error(error)
       }
       );
 
   }
 
-  openInfoWindow(marker: MapMarker) {
-    this.infoWindow?.open(marker);
+  openInfoWindow(marker: MapMarker, windowIndex: number) {
+    /// stores the current index in forEach
+    let curIdx = 0;
+    this.infoWindowsView.forEach((window: MapInfoWindow) => {
+      if (windowIndex === curIdx) {
+        window.open(marker);
+        curIdx++;
+      } else {
+        window.close();
+        curIdx++;
+      }
+    });
   }
 
   ngOnDestroy(): void {

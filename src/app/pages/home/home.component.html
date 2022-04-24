@@ -1,10 +1,10 @@
 <div class="google-map-container">
 	<google-map height="80vh" width="100vh" [zoom]="zoom" [center]="center">
 		<map-marker-clusterer [styles]="clusterStyles" [gridSize]="30">
-			<map-marker #marker="mapMarker" *ngFor="let markerPosition of markerPositions"
-				[label]="markerPosition.label" [position]="markerPosition.position" [options]="markerOptions"
-				(mapClick)="openInfoWindow(marker)">
-				<map-info-window>
+			<map-marker #marker="mapMarker" *ngFor="let markerPosition of markerPositions; ; let i = index"
+				[title]="markerPosition.text" [label]="markerPosition.label" [position]="markerPosition.position"
+				[options]="markerOptions" (mapClick)="openInfoWindow(marker, i)">
+				<map-info-window #infoWindow="mapInfoWindow">
 					<p>Latitude: {{markerPosition.position.lat}}</p>
 					<p>Longitude: {{markerPosition.position.lng}}</p>
 					<p>Name: {{markerPosition.text}}</p>

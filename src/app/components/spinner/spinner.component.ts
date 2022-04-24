@@ -11,7 +11,6 @@ export class SpinnerComponent implements OnInit {
 
   constructor(private appService: AppService) {
     this.appService.isLoading.subscribe((res: boolean) => {
-      console.log(res);
       this.loading = res;
     });
   }
